@@ -1,0 +1,724 @@
+{
+	"info": {
+		"_postman_id": "08327258-5359-4312-ac7c-70910140d3cd",
+		"name": "Student Controller",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Student",
+			"item": [
+				{
+					"name": "Create Student",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"\r",
+									"// set the student Id.\r",
+									"pm.collectionVariables.set(\"studentId\", response.studentId);\r",
+									"\r",
+									"// Test Case: Check the Response status\r",
+									"pm.test(\"Status Test\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\": \"Student\",\r\n    \"lastname\": \"1\",\r\n    \"phoneNumber\": \"1234567890\",\r\n    \"department\": [{\r\n        \"departmentId\": 1\r\n    },\r\n    {\r\n        \"departmentId\": 2\r\n    }]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/student",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"student"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Student",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"\r",
+									"// set the student Id.\r",
+									"pm.collectionVariables.set(\"studentId\", response.studentId);\r",
+									"\r",
+									"// Test Case: Check the Response status\r",
+									"pm.test(\"Status Test\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									"\r",
+									"// Department details.\r",
+									"const departmentDetails = new Map();\r",
+									"\r",
+									"// Test the department details are valid.\r",
+									"pm.test(\"Department Test\", function() {\r",
+									"    response.department.forEach(function(department) {\r",
+									"        departmentDetails.set(department.departmentId, department.department);\r",
+									"    })\r",
+									"    pm.expect(departmentDetails.size).to.eql(2);\r",
+									"    pm.expect(departmentDetails.get(1)).to.eql(\"Computer Science\");\r",
+									"    pm.expect(departmentDetails.get(2)).to.eql(\"Computer Science\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/student/{{studentId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"student",
+								"{{studentId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Update Student",
+			"item": [
+				{
+					"name": "Create Student",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"\r",
+									"// set the student Id.\r",
+									"pm.collectionVariables.set(\"studentId\", response.studentId);\r",
+									"\r",
+									"// Test Case: Check the Response status\r",
+									"pm.test(\"Status Test\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\": \"Student\",\r\n    \"lastname\": \"1\",\r\n    \"phoneNumber\": \"1234567890\",\r\n    \"department\": [{\r\n        \"departmentId\": 1\r\n    }]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/student",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"student"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Student Department",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"\r",
+									"// set the student Id.\r",
+									"pm.collectionVariables.set(\"studentId\", response.studentId);\r",
+									"\r",
+									"// Test Case: Check the Response status\r",
+									"pm.test(\"Status Test\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\": \"Student\",\r\n    \"lastname\": \"1\",\r\n    \"phoneNumber\": \"1234567890\",\r\n    \"department\": [{\r\n        \"departmentId\": 2\r\n    }]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/student/{{studentId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"student",
+								"{{studentId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Student",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"\r",
+									"// set the student Id.\r",
+									"pm.collectionVariables.set(\"studentId\", response.studentId);\r",
+									"\r",
+									"// Test Case: Check the Response status\r",
+									"pm.test(\"Status Test\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									"\r",
+									"\r",
+									"// Department details.\r",
+									"const departmentDetails = new Map();\r",
+									"\r",
+									"// Test the department details are valid.\r",
+									"pm.test(\"Department Test\", function() {\r",
+									"    response.department.forEach(function(department) {\r",
+									"        departmentDetails.set(department.departmentId, department.department);\r",
+									"    })\r",
+									"    pm.expect(departmentDetails.size).to.eql(1);\r",
+									"    pm.expect(departmentDetails.get(2)).to.eql(\"Computer Science\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/student/{{studentId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"student",
+								"{{studentId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Delete Student",
+			"item": [
+				{
+					"name": "Create Student 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"\r",
+									"// set the student Id.\r",
+									"pm.collectionVariables.set(\"studentId\", response.studentId);\r",
+									"\r",
+									"// Test Case: Check the Response status\r",
+									"pm.test(\"Status Test\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\": \"Student\",\r\n    \"lastname\": \"1\",\r\n    \"phoneNumber\": \"1234567890\",\r\n    \"department\": [{\r\n        \"departmentId\": 1\r\n    }]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/student",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"student"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Student 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"\r",
+									"// set the student Id.\r",
+									"pm.collectionVariables.set(\"studentId\", response.studentId);\r",
+									"\r",
+									"// Test Case: Check the Response status\r",
+									"pm.test(\"Status Test\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\": \"Student\",\r\n    \"lastname\": \"1\",\r\n    \"phoneNumber\": \"1234567890\",\r\n    \"department\": [{\r\n      \"departmentId\": 1\r\n    }]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/student",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"student"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Student 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"\r",
+									"// set the student Id.\r",
+									"pm.collectionVariables.set(\"studentId\", response.studentId - 1);\r",
+									"\r",
+									"// Test Case: Check the Response status\r",
+									"pm.test(\"Status Test\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/student/{{studentId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"student",
+								"{{studentId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Student",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"\r",
+									"// set the student Id.\r",
+									"pm.collectionVariables.set(\"studentId\", response.studentId);\r",
+									"\r",
+									"// Test Case: Check the Response status\r",
+									"pm.test(\"Status Test\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									"\r",
+									"\r",
+									"// Department details.\r",
+									"const departmentDetails = new Map();\r",
+									"\r",
+									"// Test the department details are valid.\r",
+									"pm.test(\"Department Test\", function() {\r",
+									"    response.department.forEach(function(department) {\r",
+									"        departmentDetails.set(department.departmentId, department.department);\r",
+									"    })\r",
+									"    pm.expect(departmentDetails.size).to.eql(1);\r",
+									"    pm.expect(departmentDetails.get(1)).to.eql(\"Computer Science\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/student/{{studentId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"student",
+								"{{studentId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Create-Update-Delete-Get",
+			"item": [
+				{
+					"name": "Create Student 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"\r",
+									"// set the student Id.\r",
+									"pm.collectionVariables.set(\"studentId\", response.studentId);\r",
+									"\r",
+									"// Test Case: Check the Response status\r",
+									"pm.test(\"Status Test\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\": \"Student\",\r\n    \"lastname\": \"1\",\r\n    \"phoneNumber\": \"1234567890\",\r\n    \"department\": [{\r\n        \"departmentId\": 1\r\n    }]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/student",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"student"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Student 1 Department",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"\r",
+									"// set the student Id.\r",
+									"pm.collectionVariables.set(\"studentId\", response.studentId);\r",
+									"\r",
+									"// Test Case: Check the Response status\r",
+									"pm.test(\"Status Test\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\": \"Student\",\r\n    \"lastname\": \"1\",\r\n    \"phoneNumber\": \"1234567890\",\r\n    \"department\": [{\r\n        \"departmentId\": 2\r\n    }]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/student/{{studentId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"student",
+								"{{studentId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Student 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"\r",
+									"// set the student Id.\r",
+									"pm.collectionVariables.set(\"studentId\", response.studentId);\r",
+									"\r",
+									"// Test Case: Check the Response status\r",
+									"pm.test(\"Status Test\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\": \"Student\",\r\n    \"lastname\": \"1\",\r\n    \"phoneNumber\": \"1234567890\",\r\n    \"department\": [{\r\n        \"departmentId\": 1\r\n    }]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/student",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"student"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Student 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"\r",
+									"// set the student Id.\r",
+									"pm.collectionVariables.set(\"studentId\", response.studentId - 1);\r",
+									"\r",
+									"// Test Case: Check the Response status\r",
+									"pm.test(\"Status Test\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/student/{{studentId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"student",
+								"{{studentId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Students",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"\r",
+									"// set the student Id.\r",
+									"pm.collectionVariables.set(\"studentId\", response.studentId);\r",
+									"\r",
+									"// Test Case: Check the Response status\r",
+									"pm.test(\"Status Test\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									"\r",
+									"\r",
+									"// Department details.\r",
+									"const departmentDetails = new Map();\r",
+									"\r",
+									"// Test the department details are valid.\r",
+									"pm.test(\"Department Test\", function() {\r",
+									"    response.department.forEach(function(department) {\r",
+									"        departmentDetails.set(department.departmentId, department.department);\r",
+									"    })\r",
+									"    pm.expect(departmentDetails.size).to.eql(1);\r",
+									"    pm.expect(departmentDetails.get(2)).to.eql(\"Computer Science\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/student/{{studentId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"student",
+								"{{studentId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "studentId",
+			"value": ""
+		}
+	]
+}
